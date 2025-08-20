@@ -1,8 +1,5 @@
 # Hospital Length of Stay Prediction Project
 
-## Author
-**Jawad Iqbal**
-
 ## Project Overview
 This project aims to develop machine learning models to predict hospital length of stay (LOS) at the time of patient admission. The goal is to support hospital resource planning and improve patient care by estimating LOS using only admission-time features.
 
