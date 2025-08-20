@@ -1,4 +1,5 @@
 SELECT DISTINCT
+
     -- Construct full admission datetime from separate date and time fields
     CAST(SpellStartDate AS DATETIME) + CAST(SpellStartTime AS DATETIME) AS admission_datetime,
 
@@ -70,7 +71,7 @@ INNER JOIN Reference_UKHD.ICD10.Codes_And_Titles_And_MetaData AS ICD_code
 WHERE SourceSys = 'TauntonandSomerset'
     AND SpellStartDate >= '2020-01-01'
     AND SpellDischargeDate <= '2024-12-31'
-    AND (WellBabyFlagDerivied = '0' OR WellBabyFlagDerivied IS NULL) -- exclude well babies
+
     AND (AdministrativeCatagory <> '02' OR AdministrativeCatagory IS NULL) -- exclude private patients
     AND TRIM(WardAdmission) <> 'Test Ward' -- remove test data
     AND em_el_dc IN ('EMERG', 'ELECT') -- keep only emergency and elective

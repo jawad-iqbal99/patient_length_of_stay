@@ -18,51 +18,24 @@ CASE
 END AS time_of_day,
 MONTH(apc_tbl.SpellStartDate) AS month,
 
---apc_tbl.SpellDischargeDate,
---apc_tbl.SpellDischargeTime,
-
---apc_tbl.EstDischargeDate,
-
---apc_tbl.DischargeDestination,
---apc_tbl.WardAdmission,
+apc_tbl.WardAdmission,
 apc_tbl.Los,
 eal_cds.PriorityType,
 eal_cds.IntendedManagement,
 
---cds_evl.PriorityType,
---cds_evl.IntendedManagement,
+apc_tbl.AdmissionMethod, 
+SourceOfAdmission, 
 
-apc_tbl.AdmissionMethod, SourceOfAdmission, 
---apc_tbl.DischargeDestination,
---apc_tbl.em_el_dc,
-
---apc_tbl.ActivityTreatmentfunctioncode [ATFC],
-
-
---demo_tbl.MaritalStatus, 
 demo_tbl.EthnicCategory,
 
 
-apc_tbl.AgeOnAdmission,  apc_tbl.StartSexofPatientsCode,
+apc_tbl.AgeOnAdmission,  
+apc_tbl.StartSexofPatientsCode,
 
 
 apc_tbl.PrimaryDiagnosisICD, 
---ICD_code.[Description], 
 ICD_code.Chapter_Number,
---ICD_code.Chapter_Description,
---apc_tbl.AllDiagnosis,
---apc_tbl.FCE_HRG,
 
---apc_tbl.PrimaryProcedureOPCS, apc_tbl.AllOperations,
-
---apc_tbl.LocalDestinationOnDischarge,
-
-
-
---apc_tbl.WardAdmission,
---apc_tbl.WardDischarge,
-
---postcode_tbl.lsoa21cd, 
 IMD.IMD_Decile
 
 
@@ -80,13 +53,13 @@ INNER JOIN CDS_EAL.dbo.tblEALCensusCurrent as eal_cds ON apc_tbl.localPatientid 
  
 Where SourceSys = 'TauntonandSomerset'
 and (SpellStartDate >='2025-01-01' AND SpellDischargeDate <= '2025-07-31')
-and (WellBabyFlagDerivied = '0' or WellBabyFlagDerivied is null) --to exclude well babies born in hospital.
+
 and (AdministrativeCatagory <> '02' or AdministrativeCatagory is null) --exclude private patients
 and trim(WardAdmission) <> 'Test Ward'
 and hospitalproviderspellnumberExt not like 'c%'
 and em_el_dc in ('ELECT')
 and apc_tbl.ActivityTreatmentfunctioncode = 320 -- 	Cardiology 
-and AgeOnAdmission >= 18 -- excluding under 18 patient as they are treated by peadiatrics
+and AgeOnAdmission >= 18 -- excluding under 18 patient as they are treated by paediatrics
 and ICD_code.Effective_To IS NULL
 --and OPCS_Code.Effective_To IS NULL
 and LastEpisodeInSpellIndicator = 1

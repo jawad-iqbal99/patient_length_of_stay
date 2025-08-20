@@ -1,4 +1,4 @@
-SELECT DISTINCT 
+SELECT DISTINCT
 
 CAST(SpellStartDate AS DATETIME) + CAST(SpellStartTime AS DATETIME) AS admission_datetime,
     
@@ -18,10 +18,8 @@ END AS time_of_day,
 
 MONTH(apc_tbl.SpellStartDate) AS month, 
 
-
 apc_tbl.Los,
 
-apc_tbl.DischargeDestination,
 apc_tbl.WardAdmission,
 
 CASE WHEN cds_ecds.AcuitySnomedCode = '1064891000000107' then 1 
@@ -46,19 +44,7 @@ apc_tbl.PrimaryDiagnosisICD,
 ICD_code.[Description], 
 ICD_code.Chapter_Number,
 ICD_code.Chapter_Description,
---apc_tbl.AllDiagnosis,
---apc_tbl.FCE_HRG,
 
---apc_tbl.PrimaryProcedureOPCS, apc_tbl.AllOperations,
-
---apc_tbl.LocalDestinationOnDischarge,
-
-
-
---apc_tbl.WardAdmission,
---apc_tbl.WardDischarge,
-
---postcode_tbl.lsoa21cd, 
 IMD.IMD_Decile
 
 
@@ -76,7 +62,6 @@ INNER JOIN CDS_ECDS.dbo.tblECDSCurrent AS cds_ecds ON demo_tbl.NHSNumber = cds_e
  
 Where SourceSys = 'TauntonandSomerset'
 and (SpellStartDate >='2020-01-01' AND SpellDischargeDate <= '2024-12-31')
-and (WellBabyFlagDerivied = '0' or WellBabyFlagDerivied is null) --to exclude well babies born in hospital.
 and (AdministrativeCatagory <> '02' or AdministrativeCatagory is null) --exclude private patients
 and trim(WardAdmission) <> 'Test Ward'
 and em_el_dc in ('EMERG')

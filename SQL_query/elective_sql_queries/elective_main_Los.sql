@@ -16,8 +16,7 @@ SELECT DISTINCT
         ELSE 'Midnight'
     END AS time_of_day,
 
-    -- Admission and discharge details
-    apc_tbl.DischargeDestination,
+    -- Admission
     apc_tbl.WardAdmission,
     apc_tbl.Los,
 
@@ -29,6 +28,8 @@ SELECT DISTINCT
     apc_tbl.AdmissionMethod,
     SourceOfAdmission,
     apc_tbl.em_el_dc,
+
+    apc_tbl.DischargeDestination,
 
     -- Demographics
     demo_tbl.EthnicCategory,
@@ -70,7 +71,6 @@ INNER JOIN CDS_EAL.dbo.tblEALCensusCurrent AS eal_cds
 WHERE SourceSys = 'TauntonandSomerset'
     AND SpellStartDate >= '2018-01-01'
     AND SpellDischargeDate <= '2024-01-31'
-    AND (WellBabyFlagDerivied = '0' OR WellBabyFlagDerivied IS NULL) -- exclude well babies
     AND (AdministrativeCatagory <> '02' OR AdministrativeCatagory IS NULL) -- exclude private patients
     AND TRIM(WardAdmission) <> 'Test Ward' -- remove test data
     AND em_el_dc = 'ELECT' -- keep only elective admissions
