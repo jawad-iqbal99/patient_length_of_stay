@@ -24,15 +24,12 @@ The dataset was extracted from the **NHS Data Warehouse** under the governance o
   - Graphs outside these folders apply to both types
 
 - `notebooks/`
-  - Contain 3 jupyter notebooks
-  - Los_analysis_emerg_elect_2020_to_24 contian analysis for both type of admission as a starting point while other are specific to each admission type.
-
-- `SQL_queries/`
-  - `emergency/`: SQL scripts used to extract emergency data
-  - `elective/`: SQL scripts used to extract elective data
-  - General queries are placed outside these folders
+  - `Los_analysis_emerg_elect_2020_to_24/` : Contain initial analysis, This is good point to start
+  - `LOS_EMERG/` : This is the main notebook of my work (this is for emergency patients)
+  - `Los_ELECT/` : This contain just some breif analysis about elective patients
+- `Dummay_dateset/`
+- Becaues I am working with confidential data and can't share it, this excel file contain a dummay dataset just to understand the data.
 
 ## Navigation Instructions
 - Start by reviewing the notebooks in the `notebooks/` folder to understand the modeling workflow.
 - Use the `graphs/` folder to explore visualizations from exploratory data analysis and model evaluation.
-- Refer to the `SQL_queries/` folder to see how data was extracted from the NHS Data Warehouse.
